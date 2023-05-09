@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package test;
+
+message Test {
+  uint64 number = 1;
+}
+
+message Contracts {
+  repeated Contract contracts = 1;
+}
+
+message Contract {
+    string address = 1;
+    string timestamp = 2;
+    uint64 ordinal = 3;
+}

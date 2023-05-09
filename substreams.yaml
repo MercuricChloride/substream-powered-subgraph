@@ -1,11 +1,15 @@
 specVersion: v0.1.0
 package:
-  name: 'substreams_ethereum_quickstart'
-  version: v1.0.0
+  name: "substreams_test"
+  version: v1.0.1
+
+imports:
+  entity: https://github.com/streamingfast/substreams-entity-change/releases/download/v0.2.1/substreams-entity-change-v0.2.1.spkg
 
 protobuf:
   files:
     - block_meta.proto
+    - test.proto
   importPaths:
     - ./proto
 
@@ -21,3 +25,31 @@ modules:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:sf.ethereum.block_meta.v1.BlockMeta
+
+  - name: graph_out
+    kind: map
+    inputs:
+      - map: map_contract
+    output:
+      type: proto:substreams.entity.v1.EntityChanges
+
+  - name: map_contract
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:test.Contracts
+
+  # - name: store_contracts
+  #   kind: store
+  #   updatePolicy: set
+  #   valueType: proto:test.Contracts
+  #   inputs:
+  #     - map: map_contract
+
+  # - name: test_module
+  #   kind: map
+  #   inputs:
+  #     - map: map_block
+  #   output:
+  #     type: proto:test.Test

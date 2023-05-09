@@ -1,0 +1,4 @@
+type Contract @entity {
+  id: ID! #address of the contract
+  timestamp: String! #timestamp of when the contract
+}
